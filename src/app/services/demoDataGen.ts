@@ -7,7 +7,7 @@ function getRandomInt(min: number, max: number): number {
 
 function createRandomCommentByModel(): CommentByModel {
     return {
-        _id: `user_${Math.random().toString(36).substring(2, 15)}`,
+        _id: `${Math.random().toString(36).substring(2, 15)}`,
         userName: `User${getRandomInt(1, 100)}`
     };
 }
@@ -17,7 +17,7 @@ function createRandomCommentModel(depth: number = 0): CommentModel | null {
 
     const comment: CommentModel = {
         imgUrl: `https://example.com/commentImg${getRandomInt(1, 10)}.jpg`,
-        _id: `comment_${Math.random().toString(36).substring(2, 15)}`,
+        _id: `${Math.random().toString(36).substring(2, 15)}`,
         commentBy: createRandomCommentByModel(),
         comment: `This is a sample comment ${getRandomInt(1, 1000)}.`,
         likes: getRandomInt(0, 500),
@@ -38,7 +38,7 @@ function createRandomCommentModel(depth: number = 0): CommentModel | null {
 
 export function createRandomContentModel(): ContentModel {
     const content: ContentModel = {
-        _id: `content_${Math.random().toString(36).substring(2, 15)}`,
+        _id: `${Math.random().toString(36).substring(2, 15)}`,
         imgUrl: 'https://res.cloudinary.com/dpnevk8db/image/upload/v1705450237/s8mdwh4iykoiro0wzsww.jpg',
         likes: getRandomInt(100, 1000),
         comments: [],
