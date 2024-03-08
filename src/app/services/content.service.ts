@@ -3,6 +3,7 @@ import { BehaviorSubject, from, Observable, throwError } from 'rxjs'
 import { catchError, retry, tap } from 'rxjs/operators'
 import { storageService } from './async-storage.service'
 import { ContentModel } from '../models/content.model'
+import { createRandomContentModel } from './demoDataGen'
 
 const ENTITY = 'content'
 
@@ -40,7 +41,7 @@ export class ContentService {
       )
   }
 
-  public getEmptyContentModel(): Partial<ContentModel> {
+  public getEmptyContent(): Partial<ContentModel> {
     return {
       imgUrl: '',
       likes: 0,
@@ -79,7 +80,7 @@ export class ContentService {
   }
 
   public save(ContentModel: ContentModel) {
-    return ContentModel._id ? this._edit(ContentModel) : this.#add(ContentModel)
+    return ContentModel._id ? this.#edit(ContentModel) : this.#add(ContentModel)
   }
 
   #add(ContentModel: ContentModel) {
@@ -96,7 +97,7 @@ export class ContentService {
       )
   }
 
-  private _edit(ContentModel: ContentModel) {
+  #edit(ContentModel: ContentModel) {
     return from(storageService.put(ENTITY, ContentModel))
       .pipe(
         tap(updatedContentModel => {
@@ -113,80 +114,11 @@ export class ContentService {
   }
 
   private _createContent() {
-    const contents: ContentModel[] = [
-      {
-        _id: "1",
-        imgUrl: `https://robohash.org/${this._makeId()}.png`,
-        likes: 120,
-        comments: [
-          {
-            _id: "c1",
-            name: "Alice",
-            comment: "Great photo!",
-            likes: 15,
-            createdAt: new Date("2024-03-01T10:00:00"),
-            comments: []
-          },
-          {
-            _id: "c2",
-            name: "Bob",
-            comment: "Love this!",
-            likes: 10,
-            createdAt: new Date("2024-03-02T12:30:00"),
-            comments: [
-              {
-                _id: "c2-1",
-                name: "Carol",
-                comment: "Totally agree!",
-                likes: 5,
-                createdAt: new Date("2024-03-02T13:00:00"),
-                comments: []
-              }
-            ]
-          }
-        ],
-        following: ["user2", "user3"]
-      },
-      {
-        _id: "2",
-        imgUrl: `https://robohash.org/${this._makeId()}.png`,
-        likes: 250,
-        comments: [
-          {
-            _id: "c3",
-            name: "Dave",
-            comment: "Amazing scenery!",
-            likes: 20,
-            createdAt: new Date("2024-03-03T15:45:00"),
-            comments: []
-          }
-        ],
-        following: ["user1", "user4", "user5"]
-      },
-      {
-        _id: "3",
-        imgUrl: `https://robohash.org/${this._makeId()}.png`,
-        likes: 180,
-        comments: [
-          {
-            _id: "c4",
-            name: "Eve",
-            comment: "Where was this taken?",
-            likes: 8,
-            createdAt: new Date("2024-03-04T09:20:00"),
-            comments: []
-          },
-          {
-            _id: "c5",
-            name: "Frank",
-            comment: "Stunning view!",
-            likes: 12,
-            createdAt: new Date("2024-03-05T11:10:00"),
-            comments: []
-          }
-        ],
-        following: ["user2", "user6"]
-      }]
+    const contents: ContentModel[] = []
+
+    for (var i = 0; i < 20; i++) {
+      contents.push(createRandomContentModel())
+    }
     return contents
   }
 
