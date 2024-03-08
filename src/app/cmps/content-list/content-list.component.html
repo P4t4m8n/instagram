@@ -1,0 +1,8 @@
+<ul class="content-list">
+  <content-preview
+   *ngFor="let content of content;
+   trackBy:trackByFn"
+    [content]="content"
+     (remove)="remove.emit($event)">
+    </content-preview>
+</ul>

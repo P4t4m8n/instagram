@@ -4,11 +4,11 @@ export const storageService = {
     post,
     put,
     remove,
-    makeId
+    make_id
 }
 
-interface EntityId {
-    id: string
+interface Entity_id {
+    _id: string
 }
 
 async function query<T>(entityType: string, delay = 100): Promise<T[]> {
@@ -19,34 +19,34 @@ async function query<T>(entityType: string, delay = 100): Promise<T[]> {
     return entities
 }
 
-async function get<T extends EntityId>(entityType: string, entityId: string): Promise<T> {
+async function get<T extends Entity_id>(entityType: string, entity_id: string): Promise<T> {
     const entities = await query<T>(entityType)
-    const entity = entities.find(entity => entity.id === entityId)
-    if (!entity) throw new Error(`Cannot get, Item ${entityId} of type: ${entityType} does not exist`)
+    const entity = entities.find(entity => entity._id === entity_id)
+    if (!entity) throw new Error(`Cannot get, Item ${entity_id} of type: ${entityType} does not exist`)
     return entity;
 }
 
 async function post<T>(entityType: string, newEntity: T): Promise<T> {
-    newEntity = { ...newEntity, id: makeId() }
+    newEntity = { ...newEntity, _id: make_id() }
     const entities = await query<T>(entityType)
     entities.push(newEntity)
     _save(entityType, entities)
     return newEntity
 }
 
-async function put<T extends EntityId>(entityType: string, updatedEntity: T): Promise<T> {
+async function put<T extends Entity_id>(entityType: string, updatedEntity: T): Promise<T> {
     const entities = await query<T>(entityType)
-    const idx = entities.findIndex(entity => entity.id === updatedEntity.id)
-    entities[idx] = updatedEntity
+    const _idx = entities.findIndex(entity => entity._id === updatedEntity._id)
+    entities[_idx] = updatedEntity
     _save(entityType, entities)
     return updatedEntity
 }
 
-async function remove<T extends EntityId>(entityType: string, entityId: string): Promise<void> {
+async function remove<T extends Entity_id>(entityType: string, entity_id: string): Promise<void> {
     const entities = await query<T>(entityType)
-    const idx = entities.findIndex(entity => entity.id === entityId)
-    if (idx !== -1) entities.splice(idx, 1)
-    else throw new Error(`Cannot remove, item ${entityId} of type: ${entityType} does not exist`)
+    const _idx = entities.findIndex(entity => entity._id === entity_id)
+    if (_idx !== -1) entities.splice(_idx, 1)
+    else throw new Error(`Cannot remove, item ${entity_id} of type: ${entityType} does not exist`)
     _save(entityType, entities)
 }
 
@@ -55,7 +55,7 @@ function _save<T>(entityType: string, entities: T[]) {
     localStorage.setItem(entityType, JSON.stringify(entities))
 }
 
-function makeId(length = 5) {
+function make_id(length = 5) {
     var txt = ''
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     for (var i = 0; i < length; i++) {
