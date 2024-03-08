@@ -1,0 +1,4 @@
+<section *ngIf="content$|async as content" class="content-index">
+
+  <content-list [content]="content" (remove)="onRemoveContent($event)"></content-list>
+</section>

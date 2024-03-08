@@ -12,7 +12,7 @@ export class ContentPreview implements OnInit {
   @Output() remove = new EventEmitter()
 
   ngOnInit(): void {
-      console.log(this.content)
+      // console.log(this.content)
   }
 
   onRemoveContact() {
