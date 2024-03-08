@@ -14,6 +14,9 @@ import { ContentPreview } from './cmps/content-preview/content-preview.component
 import { CommentPreviewComponent } from './cmps/comment-preview/comment-preview.component';
 import { CommentListComponent } from './cmps/comment-list/comment-list.component';
 import { CommentIndexComponent } from './cmps/comment-index/comment-index.component';
+import { CommentSvgComponent } from './icons/comment-svg/comment-svg.component';
+import { LikeSvgComponent } from './icons/like-svg/like-svg.component';
+import { ImageSvgComponent } from './icons/image-svg/image-svg.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { CommentIndexComponent } from './cmps/comment-index/comment-index.compon
     ContentPreview,
     CommentPreviewComponent,
     CommentListComponent,
-    CommentIndexComponent
+    CommentIndexComponent,
+    CommentSvgComponent,
+    LikeSvgComponent,
+    ImageSvgComponent
   ],
   imports: [
     BrowserModule,
