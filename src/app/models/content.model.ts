@@ -1,3 +1,4 @@
+import { CommentModel } from "./comment.model"
 export interface ContentModel {
     _id: string
     imgUrl: string
@@ -6,11 +7,4 @@ export interface ContentModel {
     following: Array<string>
 }
 
-export interface CommentModel {
-    _id: string
-    name: string
-    comment: string
-    likes: number
-    createdAt: Date
-    comments: Array<CommentModel>
-}
+
