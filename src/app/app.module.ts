@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app-root/app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ContentIndexComponent } from './pages/image-index/content-index.component';
+import { ContentIndexComponent } from './pages/content-index/content-index.component';
 import { AppFooterComponent } from './cmps/app-footer/app-footer.component';
 import { ImageDetailsComponent } from './pages/image-details/image-details.component';
 import { ImageEditComponent } from './pages/image-edit/image-edit.component';

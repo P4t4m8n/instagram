@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ContentService } from '../services/content.service';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
+import { UserService } from '../services/user.service';
+import { UserModel } from '../models/user.model';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,9 @@ import { take } from 'rxjs';
 export class AppComponent implements OnInit {
 
   contentService = inject(ContentService)
+  userService = inject(UserService)
+
+  user$: Observable<UserModel> = this.userService.loggedInUser$
 
   ngOnInit(): void {
     this.contentService.query()
